@@ -12,49 +12,57 @@ class SimpleQueryBuilder
     protected $limit;
 
 
-    public function select($select)
+    public function select($select, $alias = null)
     {
         $this->select = 'SELECT ' . $select;
 
+        if ($alias !== null) {
+            $this->select .= ' as ' . $alias;
+        }
+
         return $this;
     }
 
 
-    public function addSelect($select)
+    public function addSelect($select, $alias = null)
     {
         $this->select .= ', ' . $select;
 
-        return $this;
-    }
-
-
-    public function from($from)
-    {
-        $this->from = ' FROM ' . $from;
+        if ($alias !== null) {
+            $this->select .= ' as ' . $alias;
+        }
 
         return $this;
     }
 
 
-    public function innerJoin($table, $cond)
+    public function from($from, $alias = null)
     {
-        $this->join('INNER', $table, $cond);
+        $this->from = ' FROM ' . $from . ' ' . $alias;
 
         return $this;
     }
 
 
-    public function leftJoin($table, $cond)
+    public function innerJoin($table, $cond, $alias = null)
     {
-        $this->join('LEFT', $table, $cond);
+        $this->join('INNER', $table, $cond, $alias);
 
         return $this;
     }
 
 
-    public function join($type, $table, $cond)
+    public function leftJoin($table, $cond, $alias = null)
     {
-        $this->join .= ' ' . $type . ' JOIN ' . $table . ' ON ' . $cond;
+        $this->join('LEFT', $table, $cond, $alias);
+
+        return $this;
+    }
+
+
+    public function join($type, $table, $cond, $alias)
+    {
+        $this->join .= ' ' . $type . ' JOIN ' . $table . ' ' . $alias . ' ON ' . $cond;
 
         return $this;
     }
@@ -111,6 +119,7 @@ class SimpleQueryBuilder
         if ($offset != '') {
             $offset .= ', ';
         }
+        
         $this->limit = ' LIMIT ' . $offset . $limit;
 
         return $this;
