@@ -38,7 +38,7 @@ class SimpleQueryBuilder
 
     public function from($from, $alias = null)
     {
-        $this->from = ' FROM ' . $from . ' ' . $alias;
+        $this->from = ' FROM `' . $from . '` ' . $alias;
 
         return $this;
     }
@@ -62,7 +62,7 @@ class SimpleQueryBuilder
 
     public function join($type, $table, $cond, $alias)
     {
-        $this->join .= ' ' . $type . ' JOIN ' . $table . ' ' . $alias . ' ON ' . $cond;
+        $this->join .= ' ' . $type . ' JOIN `' . $table . '` ' . $alias . ' ON ' . $cond;
 
         return $this;
     }
@@ -119,7 +119,7 @@ class SimpleQueryBuilder
         if ($offset != '') {
             $offset .= ', ';
         }
-        
+
         $this->limit = ' LIMIT ' . $offset . $limit;
 
         return $this;
