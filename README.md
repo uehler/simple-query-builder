@@ -18,7 +18,7 @@ $builder->getQuery()
 
 The code above will create the following sql query
 ```
-SELECT firstname, lastname FROM users ORDER BY firstname ASC
+SELECT firstname, lastname FROM `users` ORDER BY firstname ASC
 ```
 
 Supported:
