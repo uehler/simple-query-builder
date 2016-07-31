@@ -108,7 +108,7 @@ class SimpleQueryBuilder
 
     public function addOrderBy($field, $sort)
     {
-        $this->order .= ' ' . $field . ' ' . $sort;
+        $this->order .= ', ' . $field . ' ' . $sort;
 
         return $this;
     }
