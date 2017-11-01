@@ -1,6 +1,12 @@
-### Simple Query Builder
+# Simple Query Builder
 
 This is a simple OOP Query Builder for PHP and MySQL
+
+### requirements
+- php 7.0 or newer
+
+
+### how it works
 
 Just do something like this
 ```
@@ -21,7 +27,7 @@ The code above will create the following sql query
 SELECT firstname, lastname FROM `users` ORDER BY firstname ASC
 ```
 
-Supported:
+**Supported:**
 - select
 - from
 - where
@@ -30,9 +36,6 @@ Supported:
 - limit and offset
 - order by
 
-TODO:
+**TODO:**
 - support more mysql stuff
 - execute queries and return the results
-
-### requirements
-- php 7.0 or newer
