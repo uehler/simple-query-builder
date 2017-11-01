@@ -33,3 +33,6 @@ Supported:
 TODO:
 - support more mysql stuff
 - execute queries and return the results
+
+### requirements
+- php 7.0 or newer

@@ -12,7 +12,7 @@ class SimpleQueryBuilder
     protected $limit;
 
 
-    public function select($select, $alias = null)
+    public function select(string $select, string $alias = null): SimpleQueryBuilder
     {
         $this->select = 'SELECT ' . $select;
 
@@ -24,7 +24,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function addSelect($select, $alias = null)
+    public function addSelect(string $select, string $alias = null): SimpleQueryBuilder
     {
         $this->select .= ', ' . $select;
 
@@ -36,7 +36,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function from($from, $alias = null)
+    public function from(string $from, string $alias = null): SimpleQueryBuilder
     {
         $this->from = ' FROM `' . $from . '` ' . $alias;
 
@@ -44,7 +44,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function innerJoin($table, $cond, $alias = null)
+    public function innerJoin(string $table, string $cond, string $alias = null): SimpleQueryBuilder
     {
         $this->join('INNER', $table, $cond, $alias);
 
@@ -52,7 +52,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function leftJoin($table, $cond, $alias = null)
+    public function leftJoin(string $table, string $cond, string $alias = null): SimpleQueryBuilder
     {
         $this->join('LEFT', $table, $cond, $alias);
 
@@ -60,7 +60,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function join($type, $table, $cond, $alias)
+    public function join(string $type, string $table, string $cond, string $alias): SimpleQueryBuilder
     {
         $this->join .= ' ' . $type . ' JOIN `' . $table . '` ' . $alias . ' ON ' . $cond;
 
@@ -68,7 +68,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function where($where)
+    public function where(string $where): SimpleQueryBuilder
     {
         $this->where = ' WHERE ' . $where;
 
@@ -76,7 +76,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function andWhere($where)
+    public function andWhere(string $where): SimpleQueryBuilder
     {
         $this->addWhere($where, 'AND');
 
@@ -84,7 +84,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function orWhere($where)
+    public function orWhere(string $where): SimpleQueryBuilder
     {
         $this->addWhere($where, 'OR');
 
@@ -92,13 +92,15 @@ class SimpleQueryBuilder
     }
 
 
-    protected function addWhere($where, $type = '')
+    protected function addWhere(string $where, string $type = ''): SimpleQueryBuilder
     {
         $this->where .= ' ' . $type . ' ' . $where;
+
+        return $this;
     }
 
 
-    public function orderBy($field, $sort)
+    public function orderBy(string $field, string $sort): SimpleQueryBuilder
     {
         $this->order = ' ORDER BY ' . $field . ' ' . $sort;
 
@@ -106,7 +108,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function addOrderBy($field, $sort)
+    public function addOrderBy(string $field, string $sort): SimpleQueryBuilder
     {
         $this->order .= ', ' . $field . ' ' . $sort;
 
@@ -114,7 +116,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function limit($limit, $offset = '')
+    public function limit(string $limit, string $offset = ''): SimpleQueryBuilder
     {
         if ($offset != '') {
             $offset .= ', ';
@@ -126,7 +128,7 @@ class SimpleQueryBuilder
     }
 
 
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->select . '
         ' . $this->from . '
